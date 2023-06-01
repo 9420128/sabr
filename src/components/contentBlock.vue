@@ -1,58 +1,104 @@
 <template>
-  <div class="hello">
-    <h1>{{ msg }}</h1>
-    <p>
-      For a guide and recipes on how to configure / customize this project,<br>
-      check out the
-      <a href="https://cli.vuejs.org" target="_blank" rel="noopener">vue-cli documentation</a>.
-    </p>
-    <h3>Installed CLI Plugins</h3>
-    <ul>
-      <li><a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-babel" target="_blank" rel="noopener">babel</a></li>
-      <li><a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-vuex" target="_blank" rel="noopener">vuex</a></li>
-    </ul>
-    <h3>Essential Links</h3>
-    <ul>
-      <li><a href="https://vuejs.org" target="_blank" rel="noopener">Core Docs</a></li>
-      <li><a href="https://forum.vuejs.org" target="_blank" rel="noopener">Forum</a></li>
-      <li><a href="https://chat.vuejs.org" target="_blank" rel="noopener">Community Chat</a></li>
-      <li><a href="https://twitter.com/vuejs" target="_blank" rel="noopener">Twitter</a></li>
-      <li><a href="https://news.vuejs.org" target="_blank" rel="noopener">News</a></li>
-    </ul>
-    <h3>Ecosystem</h3>
-    <ul>
-      <li><a href="https://router.vuejs.org" target="_blank" rel="noopener">vue-router</a></li>
-      <li><a href="https://vuex.vuejs.org" target="_blank" rel="noopener">vuex</a></li>
-      <li><a href="https://github.com/vuejs/vue-devtools#vue-devtools" target="_blank" rel="noopener">vue-devtools</a></li>
-      <li><a href="https://vue-loader.vuejs.org" target="_blank" rel="noopener">vue-loader</a></li>
-      <li><a href="https://github.com/vuejs/awesome-vue" target="_blank" rel="noopener">awesome-vue</a></li>
-    </ul>
+  <div class="content">
+    <div class="center">
+      <h1 v-if="USERS_STORE.creativeStatus">Fetch 'https://jsonplaceholder.typicode.com/users'</h1>
+      <h1 v-else>Pinia storage</h1>
+    </div>
+    <div class="row">
+      <div>
+        <UsersFilters/>
+      </div>
+      <div>
+        <UsersList/>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
+import UsersFilters from "@/components/app/filters/UsersFilters.vue";
+import UsersList from "@/components/app/filters/list/UsersList.vue";
+import {usersStore} from "@/stores/UsersFilters";
+
 export default {
-  name: 'HelloWorld',
+  name: 'ContentBlock',
+  components: {UsersList, UsersFilters},
   props: {
     msg: String
+  },
+  setup(){
+    const USERS_STORE = usersStore()
+
+    return {
+      USERS_STORE
+    }
   }
 }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped lang="scss">
+<style lang="scss">
+.content{
+  max-width: 900px;
+  width: 100%;
+  padding: 12px;
+  margin-right: auto;
+  margin-left: auto;
+  box-sizing: border-box;
+  flex: 1 0 auto;
+}
+
+.row{
+  display: flex;
+  //align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+
+  > * {
+    flex: 0 0 100%;
+    max-width: 100%;
+    width: 100%;
+    padding: 12px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+  }
+}
+
+.center{
+  text-align: center;
+}
+
+h1{
+  font-size: 1.2rem;
+  margin-bottom: 30px;
+}
+
 h3 {
   margin: 40px 0 0;
 }
+
 ul {
   list-style-type: none;
   padding: 0;
 }
+
 li {
   display: inline-block;
   margin: 0 10px;
 }
+
 a {
   color: #42b983;
+}
+
+@media (min-width: 960px) {
+  .row > * {
+    flex: 0 0 33.3333333333%;
+    max-width: 33.3333333333%;
+    width: 100%;
+    padding: 12px;
+  }
 }
 </style>
