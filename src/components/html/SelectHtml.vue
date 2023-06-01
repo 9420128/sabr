@@ -19,7 +19,7 @@
 </template>
 
 <script>
-import {defineComponent, onMounted, ref, watch} from "vue";
+import {defineComponent, onMounted, ref} from "vue";
 import SelectCloseBtn from "@/components/html/SelectCloseBtn.vue";
 import {removeClassHelper} from "@/helpers/removeClassHelper";
 
@@ -37,7 +37,6 @@ export default defineComponent ({
         let btnCloseFlag = ref(false)
         const sel = ref(0)
         let selectClass = ref(false)
-        let optionClass = ref(false) // del
 
         function changeOption(event) {
             btnCloseFlag.value = true
@@ -71,14 +70,6 @@ export default defineComponent ({
             document.addEventListener('click', selectActiveRemove)
         })
 
-        watch(btnCloseFlag, () => {
-            const select = sel._value
-
-            if (!btnCloseFlag.value) {
-                select.selectedIndex = 0
-            }
-        })
-
         return{
             changeOption,
             triggerClick,
@@ -86,7 +77,6 @@ export default defineComponent ({
             btnCloseFlag,
             sel,
             selectClass,
-            optionClass
         }
     },
 
@@ -137,7 +127,7 @@ export default defineComponent ({
     width: 100%;
     height: 44px;
     cursor: pointer;
-    padding: 0 40px 0 18px;
+    padding: 0 60px 0 18px;
     display: flex;
     border-bottom: 1px solid var(--border-solid);
     background: #fff;

@@ -72,7 +72,6 @@ export const usersStore = defineStore('usersFilters',{
     }),
     getters: {
         getFilters(state){
-            console.log(state.creativeStatus)
             if(state.creativeStatus) {
                 console.log(state.creativeStatus)
                 return state.creativeFilters
