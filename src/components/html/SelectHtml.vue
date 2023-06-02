@@ -19,7 +19,7 @@
 </template>
 
 <script>
-import {defineComponent, onMounted, ref} from "vue";
+import {defineComponent, ref} from "vue";
 import SelectCloseBtn from "@/components/html/SelectCloseBtn.vue";
 import {removeClassHelper} from "@/helpers/removeClassHelper";
 
@@ -50,6 +50,7 @@ export default defineComponent ({
         function triggerClick(){
             removeClassHelper('.select', 'open')
             selectClass.value = !selectClass.value
+            document.addEventListener('click', selectActiveRemove)
         }
 
         function filterReset(id){
@@ -63,20 +64,17 @@ export default defineComponent ({
         function selectActiveRemove(e){
             if(e.target.closest('.select.open') === null){
                 removeClassHelper('.select', 'open')
+                document.removeEventListener('click', selectActiveRemove)
             }
         }
 
-        onMounted(() => {
-            document.addEventListener('click', selectActiveRemove)
-        })
-
         return{
-            changeOption,
-            triggerClick,
-            filterReset,
             btnCloseFlag,
             sel,
             selectClass,
+            changeOption,
+            triggerClick,
+            filterReset,
         }
     },
 

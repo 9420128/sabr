@@ -1,7 +1,7 @@
 <template>
     <div class="user-list">
         <div class="user-list__img-link">
-            <img :src="img" alt="" class="user-list__img" @click="addressFlag = !addressFlag">
+            <img :src="img" alt="" class="user-list__img" @click="addressShow">
             <Address
                     v-if="addressFlag"
                     :data="address"
@@ -16,7 +16,7 @@
 
 <script>
 import Address from "@/components/app/Address.vue";
-import {defineComponent, onMounted, ref} from "vue";
+import {defineComponent, ref} from "vue";
 
 export default defineComponent ({
     components: {Address},
@@ -29,18 +29,21 @@ export default defineComponent ({
     setup(){
         const addressFlag = ref(false)
 
+        function addressShow(){
+            addressFlag.value = !addressFlag.value
+            document.addEventListener('click', addressRemove)
+        }
+
         function addressRemove(e){
             if(e.target.closest('.user-list__img') === null){
                 addressFlag.value = false
+                document.removeEventListener('click', addressRemove)
             }
         }
 
-        onMounted(() => {
-            document.addEventListener('click', addressRemove)
-        })
-
         return {
-            addressFlag
+            addressFlag,
+            addressShow
         }
     }
 })
