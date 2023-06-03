@@ -26,8 +26,8 @@ import {removeClassHelper} from "@/helpers/removeClassHelper";
 export default defineComponent ({
     components: {SelectCloseBtn},
     props: {
-        modelValue: { type: String },
-        modelResetValue: { type: String },
+        modelValue: String,
+        modelResetValue: String,
         id: [String, Number],
         label: String,
         options: Array,
@@ -63,8 +63,8 @@ export default defineComponent ({
 
         function selectActiveRemove(e){
             if(e.target.closest('.select.open') === null){
-                removeClassHelper('.select', 'open')
-                document.removeEventListener('click', selectActiveRemove)
+                selectClass.value = false
+                    document.removeEventListener('click', selectActiveRemove)
             }
         }
 

@@ -23,9 +23,6 @@ import {usersStore} from "@/stores/UsersFilters";
 export default {
   name: 'ContentBlock',
   components: {UsersList, UsersFilters},
-  props: {
-    msg: String
-  },
   setup(){
     const USERS_STORE = usersStore()
 
@@ -36,69 +33,54 @@ export default {
 }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss">
-.content{
-  max-width: 900px;
-  width: 100%;
-  padding: 12px;
-  margin-right: auto;
-  margin-left: auto;
-  box-sizing: border-box;
-  flex: 1 0 auto;
-}
-
-.row{
-  display: flex;
-  //align-items: center;
-  justify-content: center;
-  flex-wrap: wrap;
-
-  > * {
-    flex: 0 0 100%;
-    max-width: 100%;
+  .content{
+    max-width: 900px;
     width: 100%;
     padding: 12px;
+    margin-right: auto;
+    margin-left: auto;
     box-sizing: border-box;
+    flex: 1 0 auto;
+  }
+
+  .row{
     display: flex;
-    flex-direction: column;
-    gap: 1em;
+    //align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+
+    > * {
+      flex: 0 0 100%;
+      max-width: 100%;
+      width: 100%;
+      padding: 12px;
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      gap: 1em;
+    }
   }
-}
 
-.center{
-  text-align: center;
-}
-
-h1{
-  font-size: 1.2rem;
-  margin-bottom: 30px;
-}
-
-h3 {
-  margin: 40px 0 0;
-}
-
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-
-a {
-  color: #42b983;
-}
-
-@media (min-width: 960px) {
-  .row > * {
-    flex: 0 0 33.3333333333%;
-    max-width: 33.3333333333%;
-    width: 100%;
-    padding: 12px;
+  .center{
+    text-align: center;
   }
-}
+
+  h1{
+    font-size: 1.2rem;
+    margin-bottom: 30px;
+  }
+
+  h3 {
+    margin: 30px 0 0;
+  }
+
+  @media (min-width: 960px) {
+    .row > * {
+      flex: 0 0 33.3333333333%;
+      max-width: 33.3333333333%;
+      width: 100%;
+      padding: 12px;
+    }
+  }
 </style>

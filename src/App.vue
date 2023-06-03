@@ -1,13 +1,13 @@
 <template>
   <p class="center"><img alt="Vue logo" src="./assets/logo.png"></p>
 
-  <ContentBlock msg="Welcome to Your Vue.js App"/>
+  <ContentBlock/>
   <Footer/>
   <CreativeBtn/>
 </template>
 
 <script>
-import ContentBlock from './components/contentBlock.vue'
+import ContentBlock from './components/ContentBlock.vue'
 import Footer from "@/components/app/Footer.vue";
 import CreativeBtn from "@/components/app/CreativeBtn.vue";
 

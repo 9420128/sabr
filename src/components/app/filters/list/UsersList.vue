@@ -3,8 +3,8 @@
     <h3>{{ heading }}</h3>
     <Preloader/>
     <users-list-item
-            v-if="users.USERS_FILTER.length"
-            v-for = '(user, i) in users.USERS_FILTER'
+            v-if="users.getUsersFilters.length"
+            v-for = '(user, i) in users.getUsersFilters'
             :key = 'i'
             :img = 'user.avatar'
             :title = 'user.title'

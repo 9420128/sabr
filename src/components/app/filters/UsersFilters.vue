@@ -4,7 +4,6 @@
                 :label="'Filter by ' + i"
                 :id="i"
                 :options="filter"
-                :selected="i"
                 @selectChange="filterChange"
                 @selectReset="filterReset"
         />

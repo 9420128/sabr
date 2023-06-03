@@ -77,7 +77,7 @@ export const usersStore = defineStore('usersFilters',{
             }
             else return state.usersFilters
         },
-        USERS_FILTER(state){
+        getUsersFilters(state){
 
             const array = state.creativeStatus ? state.creativeUsers : state.users
 
@@ -91,10 +91,10 @@ export const usersStore = defineStore('usersFilters',{
 
                     if(array.length) {
 
-                        const regbm = /^[><]/gm.exec(filter)
-                        const numbm = /\d+/gm.exec(filter)
-                        const znack = regbm !== null ? regbm[0] : null
-                        const data = znack !== null && numbm !== null ? numbm[0] : filter
+                        const regZnack = /^[><]/gm.exec(filter)
+                        const regNum = /\d+/gm.exec(filter)
+                        const znack = regZnack !== null ? regZnack[0] : null
+                        const data = znack !== null && regNum !== null ? regNum[0] : filter
 
                         if(usersStore.length) {
 
