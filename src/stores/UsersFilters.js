@@ -7,12 +7,12 @@ export const usersStore = defineStore('usersFilters',{
         usersFiltersEl: {},
         usersFilters: {
             country: [
-                {id: 1, value: 1, title: 'russia'},
-                {id: 2, value: 2, title: 'usa'}
+                {id: 1, title: 'russia'},
+                {id: 2, title: 'usa'}
             ],
             score: [
-                {id: 1, value: 1, title: '> 20'},
-                {id: 2, value: 2, title: '< 10'}
+                {id: 1, title: '> 20'},
+                {id: 2, title: '< 10'}
             ]
         },
         users: [
@@ -80,16 +80,26 @@ export const usersStore = defineStore('usersFilters',{
         getUsersFilters(state){
 
             const array = state.creativeStatus ? state.creativeUsers : state.users
-
+            const usersFiltersIdFlag = typeof state.usersFiltersEl['usersFiltersId'] !== "undefined"
             let usersStore = []
 
             if(Object.keys(state.usersFiltersEl).length){
+
+                if(usersFiltersIdFlag){
+
+                    for(let id of state.usersFiltersEl['usersFiltersId']){
+
+                        usersStore.push(filterHelper(array, 'id', id)[0])
+
+                    }
+
+                }
 
                 for(let key in state.usersFiltersEl) {
 
                     const filter = state.usersFiltersEl[key]
 
-                    if(array.length) {
+                    if(array.length && key !== 'usersFiltersId') {
 
                         const regZnack = /^[><]/gm.exec(filter)
                         const regNum = /\d+/gm.exec(filter)
@@ -98,11 +108,14 @@ export const usersStore = defineStore('usersFilters',{
 
                         if(usersStore.length) {
 
-                            return filterHelper(usersStore, key, data, znack)
+                            usersStore = filterHelper(usersStore, key, data, znack)
 
+                        } else {
+
+                            if(usersFiltersIdFlag) return []
+
+                            usersStore = filterHelper(array, key, data, znack)
                         }
-
-                        usersStore = filterHelper(array, key, data, znack)
 
                     }
 

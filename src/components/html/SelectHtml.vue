@@ -3,10 +3,9 @@
         <span class="select-trigger" @click="triggerClick" :id="id" ref="sel">
             {{ label }}
         </span>
-        <div class="options">
+        <div class="options" :data-id="id">
             <span
                     class="option"
-                    :data-id="id"
                     v-for="option in options"
                     :key="option.id"
                     @click="changeOption"
@@ -41,14 +40,13 @@ export default defineComponent ({
         function changeOption(event) {
             btnCloseFlag.value = true
             removeClassHelper('.option', 'active')
-            removeClassHelper('.select', 'open')
+            selectClass.value = false
             event.target.classList.add('active')
             sel._value.textContent = event.target.textContent
             emit('selectChange', event.target)
         }
 
         function triggerClick(){
-            removeClassHelper('.select', 'open')
             selectClass.value = !selectClass.value
             document.addEventListener('click', selectActiveRemove)
         }
@@ -98,29 +96,26 @@ export default defineComponent ({
 
   &::after{
     content: "";
-    -ms-flex-negative: 0;
     flex-shrink: 0;
     width: 1em;
     height: 1em;
     margin-left: auto;
-    background-image: var(--bs-accordion-icon);
     background-repeat: no-repeat;
     background-size: 1em;
-    -webkit-transition: -webkit-transform 0.2s ease-in-out;
-    transition: -webkit-transform 0.2s ease-in-out;
-    -o-transition: transform 0.2s ease-in-out;
     transition: transform 0.2s ease-in-out;
     position: absolute;
-    right: 1em;
+    right: 14px;
     top: calc(100% - 30px);
+  }
+
+  &:not(.search):after{
+    background-image: var(--accordion-icon);
   }
 
   &-trigger{
     font-size: 14px;
     font-weight: 500;
     line-height: 140%;
-    -webkit-box-align: center;
-    -ms-flex-align: center;
     align-items: center;
     width: 100%;
     height: 44px;
@@ -145,10 +140,8 @@ export default defineComponent ({
   visibility: hidden;
   pointer-events: none;
   display: flex;
-  border-radius: var(--b-radius);
   box-shadow: var(--card-shadow);
   background-color: #FFFFFF;
-  //border-color: #FFFFFF;
   color: var(--h1-color);
   overflow: auto;
   max-height: 220px;
@@ -156,14 +149,8 @@ export default defineComponent ({
 
 .option {
   padding: 13px 20px;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
   align-items: center;
-  -webkit-box-pack: justify;
-  -ms-flex-pack: justify;
   justify-content: space-between;
   cursor: pointer;
   transition: var(--selct-transition);
@@ -175,9 +162,7 @@ export default defineComponent ({
   pointer-events: all;
 }
 
-.select.open::after {
-  -webkit-transform: rotate(-180deg);
-  -ms-transform: rotate(-180deg);
+.select.open:not(.search)::after {
   transform: rotate(-180deg);
 }
 

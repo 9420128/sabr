@@ -1,5 +1,5 @@
 <template>
-  <div class="content">
+  <main class="content">
     <div class="center">
       <h1 v-if="USERS_STORE.creativeStatus">Fetch 'https://jsonplaceholder.typicode.com/users'</h1>
       <h1 v-else>Pinia storage</h1>
@@ -12,7 +12,7 @@
         <UsersList/>
       </div>
     </div>
-  </div>
+  </main>
 </template>
 
 <script>
@@ -42,6 +42,7 @@ export default {
     margin-left: auto;
     box-sizing: border-box;
     flex: 1 0 auto;
+    min-height: calc(100vh - 206px - 72px - 35px);
   }
 
   .row{
@@ -69,6 +70,9 @@ export default {
   h1{
     font-size: 1.2rem;
     margin-bottom: 30px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 
   h3 {
