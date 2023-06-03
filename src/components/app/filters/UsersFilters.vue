@@ -21,7 +21,8 @@ export default defineComponent({
     setup(){
         const USERS_STORE = usersStore()
         function filterChange(target){
-            USERS_STORE.usersFiltersChange({value: target.textContent, id: target.dataset.id})
+            const parentsEl = target.closest('.options').previousElementSibling
+            USERS_STORE.usersFiltersChange({value: target.textContent, id: parentsEl.id})
         }
 
         function filterReset(id){

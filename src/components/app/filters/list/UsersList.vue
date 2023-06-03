@@ -23,8 +23,6 @@ import { usersStore } from "@/stores/UsersFilters"
 import {defineComponent, ref, watch} from "vue";
 import Preloader from "@/components/app/Preloader.vue";
 
-
-
 export default defineComponent({
     components: {Preloader, UsersListItem},
     setup(){
