@@ -26,7 +26,7 @@ export default defineComponent ({
                         .then(response => response.json())
                         .then(json => {
                             let arrUsers = []
-                            let arrFilters = {username: [], city: [], name: []}
+                            let creativeFilters = {username: [], city: [], name: []}
                             json.forEach((el, i) => {
                                 let obj = {
                                     id: el.id,
@@ -42,12 +42,12 @@ export default defineComponent ({
                                 }
 
                                 arrUsers.push(obj)
-                                arrFilters.username.push({id: el.id, title: obj.score})
-                                arrFilters.city.push({id: el.id, title: obj.city})
-                                arrFilters.name.push({id: el.id, title: obj.title})
+                                creativeFilters.username.push({id: el.id, title: obj.score})
+                                creativeFilters.city.push({id: el.id, title: obj.city})
+                                creativeFilters.name.push({id: el.id, title: obj.title})
                             })
 
-                            USERS_STORE.setCreativeFilters(arrFilters)
+                            USERS_STORE.setCreativeFilters(creativeFilters)
                             USERS_STORE.setCreativeUsers(arrUsers)
                             USERS_STORE.creativeStatePreloaderChange(false)
 
