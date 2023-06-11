@@ -3,7 +3,7 @@
         <span class="select-trigger" @click="triggerClick" :id="id" ref="sel">
             {{ label }}
         </span>
-        <div class="options" :data-id="id">
+        <div class="options">
             <span
                     class="option"
                     v-for="option in options"
