@@ -15,9 +15,13 @@
 
 ## Сборка
 Vue-cli
+
 Vue-3
+
 Pinia
+
 Sass
+
 Firebase
 
 
